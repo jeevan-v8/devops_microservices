@@ -20,8 +20,7 @@ func main() {
 
 	repo := repository.New(conn)
 	app := NewApp(repo, ctx)
-	app.InitializeRoutes()
 	if err := app.StartServer(":3001"); err != nil {
 		log.Fatal(err)
 	}
-} 
+}

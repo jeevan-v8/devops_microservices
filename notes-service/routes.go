@@ -16,11 +16,13 @@ type App struct {
 }
 
 func NewApp(repo *repository.Queries, ctx context.Context) *App {
-	return &App{
+  app :=  &App{
 		Repository: repo,
 		Server:     http.NewServeMux(),
 		Ctx:        ctx,
 	}
+  app.initializeRoutes()
+  return app
 }
 
 func (app *App) StartServer(addr string) error {
@@ -28,8 +30,9 @@ func (app *App) StartServer(addr string) error {
 	return http.ListenAndServe(addr, app.Server)
 }
 
-func (a *App) InitializeRoutes() {
-	a.Server.HandleFunc("/notes", func(w http.ResponseWriter, r *http.Request) {
+func (a *App) initializeRoutes() {
+	// Wrap each route with jsonMiddleware
+	a.Server.Handle("/notes", jsonMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			a.findAllNotesHandler(w, r)
@@ -38,11 +41,11 @@ func (a *App) InitializeRoutes() {
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
-	})
+	})))
 
-	a.Server.HandleFunc("/notes/user", a.getUserNotesHandler)
-	a.Server.HandleFunc("/notes/update", a.updateNoteHandler)
-	a.Server.HandleFunc("/notes/delete", a.deleteNoteHandler)
+	a.Server.Handle("/notes/user", jsonMiddleware(http.HandlerFunc(a.getUserNotesHandler)))
+	a.Server.Handle("/notes/update", jsonMiddleware(http.HandlerFunc(a.updateNoteHandler)))
+	a.Server.Handle("/notes/delete", jsonMiddleware(http.HandlerFunc(a.deleteNoteHandler)))
 }
 
 // Handler to fetch all notes
@@ -158,4 +161,10 @@ func (a *App) getUserNotesHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(notes)
+}
+func jsonMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		next.ServeHTTP(w, r)
+	})
 }
