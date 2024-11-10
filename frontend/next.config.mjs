@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         source: '/v2/:path*', // Rewrite rule for the second microservice
-        destination: 'http://68.183.90.32:3000/v2/:path*', // Destination for service 2
+        destination: 'http://localhost:3001/:path*', // Destination for service 2
       }
       // Add more routes as needed
     ];
