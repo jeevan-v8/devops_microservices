@@ -87,20 +87,23 @@ func (q *Queries) FindAllNotes(ctx context.Context) ([]Note, error) {
 }
 
 const getUserFromToken = `-- name: GetUserFromToken :one
-SELECT hash, user_id, expiry, scope, created_at, updated_at FROM tokens
-WHERE hash = $1
+SELECT users.id, users.email, users.password, users.activated, users.created_at, users.version
+FROM users
+INNER JOIN tokens
+ON users.id = tokens.user_id
+WHERE tokens.hash = $1
 `
 
-func (q *Queries) GetUserFromToken(ctx context.Context, hash []byte) (Token, error) {
+func (q *Queries) GetUserFromToken(ctx context.Context, hash []byte) (User, error) {
 	row := q.db.QueryRow(ctx, getUserFromToken, hash)
-	var i Token
+	var i User
 	err := row.Scan(
-		&i.Hash,
-		&i.UserID,
-		&i.Expiry,
-		&i.Scope,
+		&i.ID,
+		&i.Email,
+		&i.Password,
+		&i.Activated,
 		&i.CreatedAt,
-		&i.UpdatedAt,
+		&i.Version,
 	)
 	return i, err
 }

@@ -22,5 +22,9 @@ SELECT * FROM notes
 WHERE owner = $1;
 
 -- name: GetUserFromToken :one
-SELECT * FROM tokens
-WHERE hash = $1;
+SELECT users.id, users.email, users.password, users.activated, users.created_at, users.version
+FROM users
+INNER JOIN tokens
+ON users.id = tokens.user_id
+WHERE tokens.hash = $1;
+

@@ -74,11 +74,11 @@ func (a *App) createNewNoteHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Auth token not set", http.StatusUnauthorized)
 		return
 	}
-	user, err := a.Repository.GetUserFromToken(a.Ctx, []byte(token))
+	user, err := a.Repository.GetUserFromToken(a.Ctx, Hash(token))
 	createdNote, err := a.Repository.CreateNewNote(a.Ctx, repository.CreateNewNoteParams{
 		Title:   reqBody.Title,
 		Content: reqBody.Content,
-		Owner:   user.UserID,
+		Owner:   user.ID,
 	})
 	if err != nil {
 		http.Error(w, "Error creating note", http.StatusInternalServerError)
@@ -146,12 +146,13 @@ func (a *App) getUserNotesHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Auth token not set", http.StatusUnauthorized)
 		return
 	}
-	user, err := a.Repository.GetUserFromToken(a.Ctx, []byte(token))
+	user, err := a.Repository.GetUserFromToken(a.Ctx, Hash(token))
 	if err != nil {
+		log.Print(err)
 		http.Error(w, "Invalid token", http.StatusUnauthorized)
 		return
 	}
-	notes, err := a.Repository.GetUserNotes(a.Ctx, user.UserID)
+	notes, err := a.Repository.GetUserNotes(a.Ctx, user.ID)
 	if err != nil {
 		http.Error(w, "Error fetching user notes", http.StatusInternalServerError)
 		return

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"net/http"
 	"strings"
@@ -23,4 +24,10 @@ func getTokenFromHeader(r *http.Request) (string, error) {
 
 	// Return the token part
 	return parts[1], nil
+}
+
+
+func Hash(plaintext string) []byte {
+	hash := sha256.Sum256([]byte(plaintext))
+	return hash[:]
 }
