@@ -29,7 +29,7 @@ notes/get-user:
 ## groups/create group_name=<group_name>                  Create a new group
 notes/create:
 	@[ -n "$(notes_title)" ] || (echo "notes_title is required"; exit 1)
-	@[ -n "$(notes_content)" ] || (echo "notes_notes is required"; exit 1)
+	@[ -n "$(notes_content)" ] || (echo "notes_content is required"; exit 1)
 	http POST $(BASE_URL)/notes title="$(notes_title)" content="$(notes_content)" --session=./http.json
 
 # notes/delete:
