@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"notesHandler/internal/repository"
 	"os"
@@ -10,10 +11,21 @@ import (
 )
 
 func main() {
-	ctx := context.Background()
+	dbURL := flag.String("DATABASE_URL", "", "Database connection URL")
 
-	conn, err := pgx.Connect(context.Background(), "postgres://auth-handler:password@localhost:4321/auth-handler?sslmode=disable")
+	// Parse the flags
+	flag.Parse()
+
+	// Use the flag value
+	if *dbURL == "" {
+		log.Println("No DATABASE_URL provided.")
+    os.Exit(1)
+	} 
+  log.Print("DB url: ", *dbURL)
+	ctx := context.Background()
+	conn, err := pgx.Connect(context.Background(), *dbURL)
 	if err != nil {
+		log.Printf("Database connection failed")
 		os.Exit(1)
 	}
 	defer conn.Close(ctx)

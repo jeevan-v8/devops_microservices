@@ -1,7 +1,7 @@
 include .env
 
 # Create API DSN
-DSN="postgres://${DB_USER}:${DB_PASSWORD}@localhost:4321/${DB_NAME}?sslmode=disable"
+DSN="postgres://${DB_USER}:${DB_PASSWORD}@localhost:5432/${DB_NAME}?sslmode=disable"
 
 # Create Tests DSN
 TEST_DSN="postgres://${TEST_DB_USER}:${TEST_DB_PASSWORD}@localhost:4321/${TEST_DB_NAME}?sslmode=disable"
