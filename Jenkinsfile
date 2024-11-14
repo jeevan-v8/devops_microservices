@@ -1,11 +1,10 @@
 pipeline {
   agent any
-
   stages {
     stage("build") {
       steps {
         echo "Building images"
-        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PWD', usernameVarialbe: "USER")]) {
+        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PWD', usernameVariable: 'USER')]) {
           sh 'docker build -t pariksh1th/devops:frontend frontend/'
           sh 'docker build -t pariksh1th/devops:notes-service notes-service/'
           sh 'docker build -t pariksh1th/devops:auth-service auth-service/'
@@ -22,7 +21,6 @@ pipeline {
       }
     }
     stage("deploy") {
-
       steps {
         echo "Deploying the application"
       }
