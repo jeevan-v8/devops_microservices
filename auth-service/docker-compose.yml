@@ -47,6 +47,16 @@ services:
     ports:
       - "3001:3001"
 
+  frontend:
+    image: frontend
+    restart: always
+    container_name: frontend
+    depends_on:
+      - postgres-auth
+      - auth-service
+    ports:
+      - "3002:3000"
+
 
 volumes:
   postgres:
