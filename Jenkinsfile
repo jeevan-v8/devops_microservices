@@ -36,6 +36,8 @@ pipeline {
                 
                 // Deploy with docker-compose
                 sh 'docker-compose up -d'
+
+                echo "Application deployed successfully!"
             }
         }
     }

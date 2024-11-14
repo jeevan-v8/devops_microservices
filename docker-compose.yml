@@ -55,7 +55,7 @@ services:
       - postgres-auth
       - auth-service
     ports:
-      - "3002:3000"
+      - "3000:3000"
 
 volumes:
   postgres:
