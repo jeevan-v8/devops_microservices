@@ -213,7 +213,7 @@ const NoteTakingApp = () => {
               <div className="flex flex-col items-center justify-center h-64 text-gray-400">
                 <StickyNote className="w-12 h-12 mb-4 opacity-50" />
                 <h3 className="text-lg font-medium mb-2">No notes yet</h3>
-                <p className="text-sm text-gray-500 mb-4">Click "Add Note" to create your first note</p>
+                <p className="text-sm text-gray-500 mb-4">Click 'Add Note' to create your first note</p>
               </div>
             ) : (
               notes?.map(note => (

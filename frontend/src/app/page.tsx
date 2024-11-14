@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export default function PasswordManagerDashboard() {
   const [isLoading, setIsLoading] = useState(true)
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, ] = useState(false);
 
   const router = useRouter()
 
