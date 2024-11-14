@@ -29,13 +29,13 @@ pipeline {
                 echo "Deploying the application"
 
                 // stop running containers
-                sh 'docker compose down'
+                sh 'docker-compose down'
 
                 // Pull latest images
-                sh 'docker compose pull'
+                sh 'docker-compose pull'
                 
                 // Deploy with docker-compose
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
     }
