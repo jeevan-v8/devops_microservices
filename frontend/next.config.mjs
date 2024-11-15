@@ -10,7 +10,6 @@ const nextConfig = {
         source: '/notes/:path*',
         destination: 'http://notes-service:3001/:path*', // Using notes-service service name
       },
-	,
       {
         source: '/products/:path*',
         destination: 'http://product-service:3002/:path*', // Using product-service
