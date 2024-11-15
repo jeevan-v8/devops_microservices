@@ -9,10 +9,12 @@ pipeline {
                     sh 'docker build -t pariksh1th/devops:frontend frontend/'
                     sh 'docker build -t pariksh1th/devops:notes-service notes-service/'
                     sh 'docker build -t pariksh1th/devops:auth-service auth-service/'
+                    sh 'docker build -t pariksh1th/devops:product-service product-service/'
                     sh "echo $PWD | docker login -u $USER --password-stdin"
                     sh 'docker push pariksh1th/devops:frontend'
                     sh 'docker push pariksh1th/devops:notes-service'
                     sh 'docker push pariksh1th/devops:auth-service'
+                    sh 'docker push pariksh1th/devops:product-service'
                 }
             }
         }
