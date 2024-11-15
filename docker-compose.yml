@@ -47,6 +47,22 @@ services:
     ports:
       - "3001:3001"
 
+# Product Service
+  product-service:
+    build: ./product-service  
+    container_name: product-service
+    restart: always
+    depends_on:
+      - postgres-auth
+    environment:
+      - DB_HOST=postgres-auth      
+      - DB_PORT=5432               
+      - DB_NAME=${DB_NAME}         
+      - DB_USER=${DB_USER}         
+      - DB_PASSWORD=${DB_PASSWORD} 
+    ports:
+      - "3002:3002"                
+
   frontend:
     image: pariksh1th/devops:frontend
     restart: always
