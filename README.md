@@ -1,9 +1,65 @@
+# DevOps Microservices Application
+
+This repository is a practical implementation of a microservices-based architecture using modern DevOps principles. It features multiple backend services, a frontend interface, containerization with Docker, and a Jenkins-based CI/CD pipeline to automate deployment.
+
+The application is fully operational with an established CI/CD pipeline.
+
+---
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Technology Stack](#technology-stack)
+- [Setup Instructions](#setup-instructions)
+
+---
+
+## Project Overview
+
+This project demonstrates the development and deployment of a microservices-based architecture with containerization and automated CI/CD processes. The application consists of multiple backend services, a frontend for user interaction, and orchestration using Docker Compose.
+
+---
+
+## Features
+
+- **Microservices Architecture**: Independent services for handling authentication, note-taking, and product-related tasks.
+- **Frontend Integration**: A responsive and interactive UI built using modern frontend frameworks.
+- **Containerized Deployment**: All services are packaged as Docker containers for seamless deployment.
+- **CI/CD Pipeline**: Jenkins automates building, testing, and deploying services.
+- **Database Integration**: Persistent storage with database migrations for `auth-service` and `notes-service`.
+
+---
+## Project Structure
+
+```plaintext
+devops_microservices/
+├── auth-service/           # User authentication service
+├── notes-service/          # Notes management service
+├── product-service/        # Product management service
+├── frontend/               # Web-based user interface
+├── docker-compose.yml      # Docker Compose configuration
+├── Jenkinsfile             # Jenkins CI/CD pipeline definition
+└── README.md               # Documentation
+
+```
+## Technology Stack
+
+- **Backend**: Go
+- **Frontend**: Next.js, TailwindCSS
+- **Containerization**: Docker
+- **Orchestration**: Docker Compose
+- **CI/CD**: Jenkins
+- **Database**: PostgreSQL
+
 # Building and Running a Node.js Application with Docker
 
 This document outlines the steps to create a Docker container for a Node.js application using a Dockerfile.
 
 ## 1. Define the Dockerfile
 
+## Setup Instructions
 
 # CI/CD Setup for Node.js Web Project in Jenkins
 
