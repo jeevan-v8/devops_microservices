@@ -13,6 +13,7 @@ The application is fully operational with an established CI/CD pipeline.
 - [Technology Stack](#technology-stack)
 - [Setup Instructions](#setup-instructions)
 - [Service Details](#service-details)
+- [Service Details](#service-details)
 ---
 
 ## Project Overview
