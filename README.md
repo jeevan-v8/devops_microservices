@@ -15,7 +15,7 @@ This repository showcases a microservices architecture with backend services, a 
 
 ## Project Overview
 
-This project demonstrates the development and deployment of a microservices-based architecture with containerization and automated CI/CD processes. The application consists of multiple backend services, a frontend for user interaction, and orchestration using Docker Compose.
+This project showcases a microservices-based architecture with containerization, featuring multiple backend services, a user-facing frontend, and orchestration via Docker Compose. It also integrates automated CI/CD pipelines for streamlined development and deployment.
 
 ---
 
