@@ -23,11 +23,11 @@ This project demonstrates the development and deployment of a microservices-base
 
 ## Features
 
-- **Microservices Architecture**: Independent services for handling authentication, note-taking, and product-related tasks.
-- **Frontend Integration**: A responsive and interactive UI built using modern frontend frameworks.
-- **Containerized Deployment**: All services are packaged as Docker containers for seamless deployment.
-- **CI/CD Pipeline**: Jenkins automates building, testing, and deploying services.
-- **Database Integration**: Persistent storage with database migrations for `auth-service` and `notes-service`.
+- **Microservices**: Independent services for authentication, note-taking, and product management.
+- **Frontend**: Responsive UI built with modern frameworks.
+- **Containerization**: Dockerized services for easy deployment.
+- **CI/CD**: Jenkins automates build, test, and deployment processes.
+- **Database**: Persistent storage with migrations for `auth-service` and `notes-service`.
 
 ---
 ## Technology Stack
