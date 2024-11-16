@@ -10,7 +10,6 @@ The application is fully operational with an established CI/CD pipeline.
 
 - [Project Overview](#project-overview)
 - [Features](#features)
-- [Project Structure](#project-structure)
 - [Technology Stack](#technology-stack)
 - [Setup Instructions](#setup-instructions)
 
@@ -31,22 +30,9 @@ This project demonstrates the development and deployment of a microservices-base
 - **Database Integration**: Persistent storage with database migrations for `auth-service` and `notes-service`.
 
 ---
-## Project Structure
-
-```plaintext
-devops_microservices/
-├── auth-service/           # User authentication service
-├── notes-service/          # Notes management service
-├── product-service/        # Product management service
-├── frontend/               # Web-based user interface
-├── docker-compose.yml      # Docker Compose configuration
-├── Jenkinsfile             # Jenkins CI/CD pipeline definition
-└── README.md               # Documentation
-
-```
 ## Technology Stack
 
-- **Backend**: Go
+- **Backend**: Go, Javscript
 - **Frontend**: Next.js, TailwindCSS
 - **Containerization**: Docker
 - **Orchestration**: Docker Compose
@@ -81,7 +67,7 @@ Enter the jenkins conatiner as root and give permission to run docker commands
 ```bash
 docker exec -u 0 -it <conatiner-id> /bin/bash
 ```
-./docs/3.Jenkins permissions.png
+![jenkins permission](./docs/jenkins_permissions.png)
 
 
 ## 2. Access the Jenkins UI
@@ -93,10 +79,9 @@ Once Jenkins is running, open your web browser and navigate to:
 
 Follow the instructions on the setup page to create an admin account.
 
-![Dashboar](./docs/dashboard.png)
+![Dashboard](./docs/dashboard.png)
 
 
-./docs/4.pipeline-config.png
 
 We have three services 
 1. Auth services
@@ -126,14 +111,16 @@ Each have there Dockerfile in respective folder. And a docker-compose.yml at the
 
 **Note:** We have a postgresql database managed in docker-compose which is accessed by both notes-service & auth-service
 
+![Dashboarh](./docs/pipeline-config.png)
+
 # Jenkins pipeline 
 
-1. Build images and push them to docker register ( credentials are configured in jenkins dashboard )
+1. Build images and push them to docker hub ( credentials are configured in Jenkins dashboard )
 2. Test step
 3. Deploy: Run docker compose
-    1. Pull latest images from docker registory (which is public)
+    1. Pull latest images from docker hub (which is public)
     2. Loads the environment variables
-    3. Runs images in a single docker network while exposing port 3000 to access frontend
+    3. Runs images in a single docker network while exposing port 3000 to access front-end, 3002 for product-service API
 ```groovy
 
 pipeline {
@@ -184,7 +171,7 @@ pipeline {
 }
 ```
 
-./docs/5.pipeline-overview.png
-./docs/6.success-pipeline.png
+![pipeline-overview](./docs/pipeline-overview.png)
+![success-pipeline](./docs/success-pipeline.png)
 
 
