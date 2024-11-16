@@ -39,17 +39,11 @@ This project demonstrates the development and deployment of a microservices-base
 - **CI/CD**: Jenkins
 - **Database**: PostgreSQL
 
-# Building and Running a Node.js Application with Docker
-
-This document outlines the steps to create a Docker container for a Node.js application using a Dockerfile.
-
-## 1. Define the Dockerfile
+---
 
 ## Setup Instructions
 
-# CI/CD Setup for Node.js Web Project in Jenkins
-
-## 1. Deploy Jenkins to a Remote Server Using Docker
+### 1. Deploy Jenkins to a Remote Server Using Docker
 
 To deploy Jenkins with moutining volumes to allow jenkins to run docker commands, run the following command in your terminal:
 
@@ -70,7 +64,7 @@ docker exec -u 0 -it <conatiner-id> /bin/bash
 ![jenkins permission](./docs/jenkins_permissions.png)
 
 
-## 2. Access the Jenkins UI
+### 2. Access the Jenkins UI
 
 Once Jenkins is running, open your web browser and navigate to:
 `http://<your-server-ip>:8080`
@@ -88,7 +82,8 @@ We have three services
 2. Notes services
 3. Front end
 
-# Main piple files
+### Main pipeline files
+```txt
 .
 ├── Jenkinsfile
 │ 
@@ -105,22 +100,24 @@ We have three services
 │
 ├── product-service
 │   ├── Dockerfile
-
+```
 
 Each have there Dockerfile in respective folder. And a docker-compose.yml at the root to run them all at once in a single docker network.
 
 **Note:** We have a postgresql database managed in docker-compose which is accessed by both notes-service & auth-service
 
+---
+
 ![Dashboarh](./docs/pipeline-config.png)
 
-# Jenkins pipeline 
+## Jenkins pipeline 
 
-1. Build images and push them to docker hub ( credentials are configured in Jenkins dashboard )
+1. Build images and push them to docker hub ( credentials are  configured in Jenkins dashboard )
 2. Test step
 3. Deploy: Run docker compose
-    1. Pull latest images from docker hub (which is public)
-    2. Loads the environment variables
-    3. Runs images in a single docker network while exposing port 3000 to access front-end, 3002 for product-service API
+    - Pull latest images from docker hub (which is public)
+    - Loads the environment variables
+    - Runs images in a single docker network while exposing port 3000 to access front-end, 3002 for product-service API
 ```groovy
 
 pipeline {
