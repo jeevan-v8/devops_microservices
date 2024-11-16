@@ -1,6 +1,7 @@
 # DevOps Microservices Application
 
-This repository is a practical implementation of a microservices-based architecture using modern DevOps principles. It features multiple backend services, a frontend interface, containerization with Docker, and a Jenkins-based CI/CD pipeline to automate deployment.
+
+This repository is a practical implementation of a microservices-based architecture using modern DevOps principles. It features multiple backend services, a frontend interface, containerization using  Docker, and a Jenkins-based CI/CD pipeline to automate deployment.
 
 The application is fully operational with an established CI/CD pipeline.
 
