@@ -12,7 +12,7 @@ The application is fully operational with an established CI/CD pipeline.
 - [Features](#features)
 - [Technology Stack](#technology-stack)
 - [Setup Instructions](#setup-instructions)
-
+- [Service Details](#service-details)
 ---
 
 ## Project Overview
@@ -38,6 +38,167 @@ This project demonstrates the development and deployment of a microservices-base
 - **Orchestration**: Docker Compose
 - **CI/CD**: Jenkins
 - **Database**: PostgreSQL
+
+---
+
+## Service Details
+
+### **Auth Service**
+
+#### **Purpose**
+The Auth Service handles all user-related functionality, including user registration, login, authentication, and password recovery.
+
+#### **Key Features**
+- User login and registration.
+- JWT (JSON Web Token) generation and validation for secure authentication.
+- Email-based password recovery using SMTP.
+
+#### **Tech Stack**
+- **Language**: Go  
+- **Database**: PostgreSQL  
+
+#### **Directory Structure**
+```
+auth-service/
+├── cmd/
+│   └── api/
+│       └── main.go        # Entry point of the service
+├── internal/
+│   └── handlers/          # API route handlers
+│   └── models/            # Database models
+│   └── utils/             # Helper functions
+└── Dockerfile             # Docker configuration
+```
+
+#### **Environment Variables**
+| **Variable**       | **Description**              | **Default Value** |
+|--------------------|------------------------------|-------------------|
+| `PORT`             | Port the service runs on     | `8080`            |
+| `DB_USER`          | Database username            | `postgres`        |
+| `DB_PASSWORD`      | Database password            | `password`        |
+| `JWT_SECRET`       | Secret key for JWT tokens    | `secret`          |
+| `SMTP_HOST`        | SMTP server host             | `smtp.example.com`|
+| `SMTP_PORT`        | SMTP server port             | `587`             |
+
+#### **Endpoints**
+| **Method** | **Endpoint**        | **Description**               |
+|------------|---------------------|-------------------------------|
+| `POST`     | `/login`            | User login                    |
+| `POST`     | `/register`         | Register a new user           |
+| `POST`     | `/reset-password`   | Reset user password           |
+
+---
+
+### **Notes Service**
+
+#### **Purpose**
+The Notes Service allows users to create, read, update, and delete personal notes.
+
+#### **Key Features**
+- Create, retrieve, update, and delete notes.
+- Relational database integration for storing notes.
+- Authentication integration with `auth-service`.
+
+#### **Tech Stack**
+- **Language**: Go  
+- **Database**: PostgreSQL  
+
+#### **Directory Structure**
+```
+notes-service/
+├── cmd/
+│   └── api/
+│       └── main.go        # Entry point of the service
+├── internal/
+│   └── handlers/          # API route handlers
+│   └── models/            # Database models
+│   └── utils/             # Helper functions
+└── Dockerfile             # Docker configuration
+```
+
+#### **Environment Variables**
+| **Variable**       | **Description**              | **Default Value** |
+|--------------------|------------------------------|-------------------|
+| `DATABASE_URL`     | PostgreSQL connection string | `""`              |
+
+#### **Endpoints**
+| **Method** | **Endpoint**        | **Description**              |
+|------------|---------------------|------------------------------|
+| `GET`      | `/notes`            | Retrieve all notes           |
+| `POST`     | `/notes`            | Create a new note            |
+| `PUT`      | `/notes/{id}`       | Update an existing note      |
+| `DELETE`   | `/notes/{id}`       | Delete a note                |
+
+---
+
+### **Product Service**
+
+#### **Purpose**
+The Product Service is responsible for managing product-related data.
+
+#### **Key Features**
+- API for adding, listing, and deleting products.
+- Lightweight service to demonstrate modularity.
+
+#### **Tech Stack**
+- **Language**: Go  
+- **Database**: PostgreSQL  
+
+#### **Directory Structure**
+```
+product-service/
+├── cmd/
+│   └── api/
+│       └── main.go        # Entry point of the service
+├── internal/
+│   └── handlers/          # API route handlers
+│   └── models/            # Database models
+│   └── utils/             # Helper functions
+└── Dockerfile             # Docker configuration
+```
+
+#### **Environment Variables**
+| **Variable**       | **Description**              | **Default Value** |
+|--------------------|------------------------------|-------------------|
+| `DATABASE_URL`     | PostgreSQL connection string | `""`              |
+
+#### **Endpoints**
+| **Method** | **Endpoint**        | **Description**              |
+|------------|---------------------|------------------------------|
+| `GET`      | `/products`         | List all products            |
+| `POST`     | `/products`         | Add a new product            |
+| `DELETE`   | `/products/{id}`    | Delete a product             |
+
+---
+
+### **Frontend**
+
+#### **Purpose**
+The frontend provides a user-friendly web interface for interacting with the backend services.
+
+#### **Key Features**
+- Developed using **Next.js** and styled with **TailwindCSS**.
+- Seamless API integration with the backend services.
+- Fully responsive design for all screen sizes.
+
+#### **Tech Stack**
+- **Framework**: Next.js  
+- **Styling**: TailwindCSS  
+
+#### **Directory Structure**
+```
+frontend/
+├── pages/               # Next.js pages
+├── components/          # Reusable UI components
+├── public/              # Static assets
+├── styles/              # Global CSS styles
+└── Dockerfile           # Docker configuration
+```
+
+#### **Environment Variables**
+| **Variable**           | **Description**           | **Default Value** |
+|------------------------|---------------------------|-------------------|
+| `NEXT_PUBLIC_API_URL`  | URL for backend API       | `http://localhost`|
 
 ---
 
