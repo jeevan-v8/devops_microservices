@@ -9,6 +9,7 @@ This repository showcases a microservices architecture with backend services, a 
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Technology Stack](#technology-stack)
+- [Architecture and Sequence Diagram](#architecture-and-sequence-diagram)
 - [Setup Instructions](#setup-instructions)
 
 ---
@@ -38,6 +39,65 @@ This project showcases a microservices-based architecture with containerization,
 - **Database**: PostgreSQL
 
 ---
+## Architecture and Sequence Diagram
+
+- The application follows a **microservices architecture**, separating concerns between the frontend and backend services.
+- Below is the sequence diagram of this application.
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Frontend
+    participant AuthService as Auth Service
+    participant NotesService as Notes Service
+    participant ProductService as Product Service
+    participant Database
+
+    %% User Login Flow
+    User ->> Frontend: POST /login (credentials)
+    Frontend ->> AuthService: Forward login request
+    AuthService ->> Database: Validate user credentials
+    Database -->> AuthService: Return validation result
+    AuthService -->> Frontend: Return JWT token (if successful)
+    Frontend -->> User: Display login success/failure
+
+    %% Retrieve Notes Flow
+    User ->> Frontend: GET /notes
+    Frontend ->> NotesService: Forward request with JWT
+    NotesService ->> Database: Fetch user's notes
+    Database -->> NotesService: Return notes data
+    NotesService -->> Frontend: Return notes data
+    Frontend -->> User: Display notes on UI
+
+    %% Add New Product Flow
+    User ->> Frontend: POST /products (product details)
+    Frontend ->> ProductService: Forward request with JWT
+    ProductService ->> Database: Insert product data
+    Database -->> ProductService: Confirm insertion
+    ProductService -->> Frontend: Return success message
+    Frontend -->> User: Display product added confirmation
+
+    %% Delete Product Flow
+    User ->> Frontend: DELETE /products/{id}
+    Frontend ->> ProductService: Forward request with JWT and product ID
+    ProductService ->> Database: Delete product by ID
+    Database -->> ProductService: Confirm deletion
+    ProductService -->> Frontend: Return success message
+    Frontend -->> User: Display deletion confirmation
+
+```
+### Architecture Overview
+
+This system follows a client-server architecture with separate services for authentication, notes management, and product management. The flow of interactions is as follows:
+
+1. **Frontend**: The user interacts with the UI, sending requests for login, notes retrieval, and product operations.
+2. **Auth Service**: Validates user credentials and issues JWT tokens for authenticated sessions.
+3. **Notes Service**: Manages user notes by fetching and displaying data from the database.
+4. **Product Service**: Handles product-related operations, including adding and deleting products, by interacting with the database.
+5. **Database**: Stores user credentials, notes, and product data, supporting CRUD operations.
+
+This architecture ensures a modular, secure, and scalable approach to user and product management.
+
 
 ## Setup Instructions
 
