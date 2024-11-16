@@ -1,8 +1,6 @@
 # DevOps Microservices Application
 
-This repository demonstrates a microservices-based architecture with backend services, a frontend interface, and Docker containerization. It includes a Jenkins-driven CI/CD pipeline for automated deployment.
-
-The application is fully operational with an established CI/CD pipeline.
+This repository showcases a microservices architecture with backend services, a frontend interface, and Docker containerization. It includes a Jenkins-driven CI/CD pipeline for automated deployment and is fully operational.
 
 ---
 
