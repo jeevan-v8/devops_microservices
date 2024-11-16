@@ -16,7 +16,7 @@ const nextConfig = {
       }
       // Add more routes as needed
     ];
-  },
+  }
 };
 
 export default nextConfig;

@@ -1,6 +1,6 @@
 // components/ProductList.tsx
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from 'services/productService';  // Using the alias
+import { fetchProducts } from '@/services/productService';  // Using the alias
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
